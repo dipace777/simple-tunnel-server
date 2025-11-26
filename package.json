@@ -1,0 +1,25 @@
+{
+  "name": "director",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "build": "pnpm -r build",
+    "check-types": "pnpm -r check-types",
+    "dev:native": "pnpm --filter native dev",
+    "dev:web": "pnpm --filter web dev",
+    "dev:server": "pnpm --filter server dev"
+  },
+  "packageManager": "pnpm@10.22.0",
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.11"
+  }
+}
