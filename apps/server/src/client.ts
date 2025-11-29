@@ -14,7 +14,11 @@ const client = new grpcObj.tunnel.TunnelService(
 
 const stream = client.Connect();
 
-stream.write({ clientId: "client-1", ack: "connected" });
+stream.write({
+  clientId: "client-1",
+  token:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6ImNsaWVudC0xIiwiaWF0IjoxNzY0NDQxNzA1LCJleHAiOjE3NjQ1MjgxMDV9.eyOtVgsZvLgxP3g54VFTtlecC2AkvEHDPdXYRJfVnEk",
+});
 
 stream.on("data", (msg: any) => {
   console.log("Received command:", msg.command, msg.payload);
