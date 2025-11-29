@@ -39,10 +39,12 @@ app.post("/issue-token", (req, res) => {
 });
 
 // Trigger client command via REST
-app.post("/trigger", (req, res) => {
+app.post("/trigger", async (req, res) => {
   const { clientId, command, payload } = req.body;
 
-  const ok = sendCommand(clientId, command, payload);
+  const data = JSON.stringify(payload);
+
+  const ok = sendCommand(clientId, command, data);
 
   if (!ok) return res.status(400).json({ error: "Client not connected" });
 

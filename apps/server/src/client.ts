@@ -20,8 +20,12 @@ stream.write({
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6ImNsaWVudC0xIiwiaWF0IjoxNzY0NDQxNzA1LCJleHAiOjE3NjQ1MjgxMDV9.eyOtVgsZvLgxP3g54VFTtlecC2AkvEHDPdXYRJfVnEk",
 });
 
-stream.on("data", (msg: any) => {
+stream.on("data", async (msg: any) => {
   console.log("Received command:", msg.command, msg.payload);
+
+  const data = await JSON.parse(msg.payload);
+
+  console.log("acceee", data);
 
   if (msg.command === "HELLO") {
     console.log("Executing hello world");
