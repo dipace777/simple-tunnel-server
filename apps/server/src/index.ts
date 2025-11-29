@@ -3,6 +3,7 @@ import cors from "cors";
 import express from "express";
 import { startGRPCServer } from "./grpc";
 import { sendCommand } from "./grpc-tunnel-server";
+import jwt from "jsonwebtoken";
 
 const app = express();
 
@@ -17,6 +18,24 @@ app.use(express.json());
 
 app.get("/", (_req, res) => {
   res.status(200).send("OK");
+});
+
+app.post("/issue-token", (req, res) => {
+  const { clientId } = req.body;
+
+  if (!clientId) {
+    return res.status(400).json({ error: "Missing clientId" });
+  }
+
+  const token = jwt.sign(
+    { clientId },
+    process.env.JWT_SECRET || "randomsecret",
+    {
+      expiresIn: "24h",
+    }
+  );
+
+  res.json({ token });
 });
 
 // Trigger client command via REST

@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "dotenv": "catalog:",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "uuid": "^13.0.0",
     "zod": "^4.1.11"
   },
@@ -23,6 +24,7 @@
     "@director/config": "workspace:*",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.13.11",
     "tsdown": "^0.16.5",
     "tsx": "^4.19.2",
