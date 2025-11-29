@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package tunnel;
+
+service TunnelService {
+  rpc Connect(stream TunnelRequest) returns (stream TunnelResponse);
+}
+
+message TunnelRequest {
+  string clientId = 1;
+}
+
+message TunnelResponse {
+  string command = 1;
+  string payload = 2;
+}

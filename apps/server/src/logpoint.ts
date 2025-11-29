@@ -2,17 +2,24 @@ import * as grpc from "@grpc/grpc-js";
 import * as protoLoader from "@grpc/proto-loader";
 import path from "path";
 
-const PROTO_PATH = path.resolve(process.cwd(), "proto/service.proto");
+const PROTO_PATH = path.resolve(process.cwd(), "proto/tunnel.proto");
 
-const packageDef = protoLoader.loadSync(PROTO_PATH);
-const grpcObject = grpc.loadPackageDefinition(packageDef) as any;
+const def = protoLoader.loadSync(PROTO_PATH);
+const grpcObj = grpc.loadPackageDefinition(def) as any;
 
-const client = new grpcObject.example.ExampleService(
+const client = new grpcObj.tunnel.TunnelService(
   "localhost:50051",
   grpc.credentials.createInsecure()
 );
 
-client.SayHello({ name: "Dipesh" }, (err: any, response: any) => {
-  console.log("error:", err);
-  console.log(response);
+const stream = client.Connect();
+
+stream.write({ clientId: "client-1", ack: "connected" });
+
+stream.on("data", (msg: any) => {
+  console.log("Received command:", msg.command, msg.payload);
+
+  if (msg.command === "HELLO") {
+    console.log("Executing hello world");
+  }
 });
