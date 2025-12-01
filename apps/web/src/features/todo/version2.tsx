@@ -20,14 +20,14 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { todoSchemaVersion1 } from "@/schema/todoSchema";
+import { todoSchemaVersion2 } from "@/schema/todoSchema";
 import ReactJson from "react-json-view";
 
-type TodoFormData = z.infer<typeof todoSchemaVersion1>;
+type TodoFormData = z.infer<typeof todoSchemaVersion2>;
 
-const jsonSchema = z.toJSONSchema(todoSchemaVersion1);
+const jsonSchema = z.toJSONSchema(todoSchemaVersion2);
 
-const TodoFeature = () => {
+const TodoFeatureVersion2 = () => {
   const {
     register,
     handleSubmit,
@@ -36,7 +36,7 @@ const TodoFeature = () => {
     reset,
     formState: { errors },
   } = useForm<TodoFormData>({
-    resolver: zodResolver(todoSchemaVersion1),
+    resolver: zodResolver(todoSchemaVersion2),
     defaultValues: {
       title: "A new task",
       done: false,
@@ -156,4 +156,4 @@ const TodoFeature = () => {
   );
 };
 
-export default TodoFeature;
+export default TodoFeatureVersion2;
