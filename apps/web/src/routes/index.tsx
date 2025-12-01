@@ -21,16 +21,11 @@ import {
 import { CheckCircle2, Circle, Clock } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { todoSchemaVersion1 } from "@/schema/todoSchema";
 
-const todoSchema = z.object({
-  title: z.string(),
-  done: z.boolean(),
-  status: z.enum(["todo", "in-progress", "done"]).optional(),
-});
+type TodoFormData = z.infer<typeof todoSchemaVersion1>;
 
-type TodoFormData = z.infer<typeof todoSchema>;
-
-const jsonSchema = z.toJSONSchema(todoSchema);
+const jsonSchema = z.toJSONSchema(todoSchemaVersion1);
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
@@ -45,7 +40,7 @@ function HomeComponent() {
     reset,
     formState: { errors },
   } = useForm<TodoFormData>({
-    resolver: zodResolver(todoSchema),
+    resolver: zodResolver(todoSchemaVersion1),
     defaultValues: {
       title: "A new task",
       done: false,
