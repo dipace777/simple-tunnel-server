@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import TodoFeature from "@/features/todo/version1";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
