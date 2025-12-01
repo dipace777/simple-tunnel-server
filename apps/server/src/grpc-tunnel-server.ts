@@ -45,7 +45,10 @@ export const TunnelHandlers = {
     call.on("end", () => {
       if (authenticatedClientId) {
         console.log("Client disconnected:", authenticatedClientId);
-        connectedClients.delete(authenticatedClientId);
+        const current = connectedClients.get(authenticatedClientId);
+        if (current === call) {
+          connectedClients.delete(authenticatedClientId);
+        }
       }
       call.end();
     });
