@@ -17,7 +17,7 @@ const stream = client.Connect();
 stream.write({
   clientId: "client-1",
   token:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6ImNsaWVudC0xIiwiaWF0IjoxNzY0NDQxNzA1LCJleHAiOjE3NjQ1MjgxMDV9.eyOtVgsZvLgxP3g54VFTtlecC2AkvEHDPdXYRJfVnEk",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6ImNsaWVudC0xIiwiaWF0IjoxNzY0NTc3ODU0LCJleHAiOjE3NjQ2NjQyNTR9.p5zzy47TEiLBLUOsmP84u_kV51OXkFrP6Bo9J98auGU",
 });
 
 stream.on("data", async (msg: any) => {

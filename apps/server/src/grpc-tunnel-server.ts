@@ -26,6 +26,14 @@ export const TunnelHandlers = {
 
         console.log(`Client authenticated: ${clientId}`);
 
+        // 🔥 If old session exists, terminate it before replacing
+        const existing = connectedClients.get(clientId);
+        if (existing && existing !== call) {
+          console.log(`Closing previous session for ${clientId}`);
+          existing.write({ command: "ERROR", payload: "SESSION_REPLACED" });
+          existing.end();
+        }
+
         connectedClients.set(clientId, call);
       } catch (err) {
         console.error("Invalid token for client", clientId, err);
